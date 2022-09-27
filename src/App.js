@@ -3,13 +3,25 @@ import React, { useState } from "react";
 import './App.css';
 
 const App = () => {
+
+  const [data, setData] = useState({
+    firstNum: 0,
+    secondNum: 0,
+    resulto: 0
+  }) 
+
+  const multiple = (e) => {
+    e.preventDefault()
+    setData(prev => ({...prev, resulto: prev.firstNum * prev.secondNum}))
+  } 
+
   const [counter, setCounter] = useState(0);
   
-  const handleClick1 = () => {
+  const Click1 = () => {
     setCounter(counter + 1);
   }
   
-  const handleClick2 = () => {
+  const Click2 = () => {
     setCounter(counter - 1);
   }
   
@@ -25,6 +37,23 @@ const App = () => {
       height: '100%',
       top: '-25%',
     }}>
+
+      <div class="geral">
+        <h1>Multiplicador</h1>
+          <form onSubmit={multiple}>
+            <input type="number" value={data.firstNumber}
+              onChange={e => setData(prev => ({...prev, firstNumber: Number(e.target.value)}))}
+              />
+            <input type="number" value={data.secondNumber}
+              onChange={ e => setData(prev => ({...prev, secondNumber: Number(e.target.value)}))}
+              />
+                <input type="submit" value="Calcular"/>
+           </form>
+        <p><strong>Resulto: </strong><span>{data.result}</span></p>
+      </div>
+
+      <p>-------------------------------------------------</p>
+
       Contador de pessoas      
       <div style={{
         fontSize: '290%',
@@ -41,7 +70,7 @@ const App = () => {
           backgroundColor: 'green',
           color: 'white',
         }}
-          onClick={handleClick1}>+</button>
+          onClick={Click1}>+</button>
         <button style={{
           fontSize: '60%',
           position: 'relative',
@@ -49,8 +78,10 @@ const App = () => {
           backgroundColor: 'red',
           color: 'white',
         }}
-          onClick={handleClick2}>-</button>
+          onClick={Click2}>-</button>
       </div>
+
+      <p>-------------------------------------------------</p>
 
       <div>
         <img src="https://static.wikia.nocookie.net/7a370ffa-7049-4223-a436-c11602ab9c76"/>
